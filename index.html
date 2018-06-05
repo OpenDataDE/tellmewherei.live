@@ -18,6 +18,7 @@
     integrity="sha512-m+BZ3OSlzGdYLqUBZt3u6eA0sH+Txdmq7cqA1u8/B2aTXviGMMLOfrKyiIW7181jbzZAY0u+3jWoiL61iLcTKQ=="
     crossorigin=""></script>
 
+    <script src="https://js.arcgis.com/4.7/"></script>
 
   <style>
     body { margin:0; padding:0; }
@@ -29,24 +30,66 @@
 <div id="map"></div>
 
 <script>
-  var map = L.map("map").setView([39.57, -75.82], 10);
+  const featureLayers = {
+    representative: L.esri.featureLayer({
+      url: 'https://firstmap.delaware.gov/arcgis/rest/services/Boundaries/DE_DistrictsRepresentative/MapServer/0'
+    }),
+    senate: L.esri.featureLayer({
+      url: 'https://firstmap.delaware.gov/arcgis/rest/services/Boundaries/DE_DistrictsSenate/MapServer/0'
+    })
+  }
+
+  const currentFeatures = {}
+
+  // set the map to the center of Delaware at zoom level 9
+  var map = L.map("map").setView([39.144974,-75.947085], 9);
 
   L.esri.basemapLayer("Topographic").addTo(map);
-  const councils = L.esri.featureLayer({
-    url: 'https://gis.nccde.org/agsserver/rest/services/BaseMaps/Assessment/MapServer/4',
-    style: (feature) => {
-      if (feature.properties['DISTRICT_'] % 2 === 0) {
-        return { color: 'green', weight: 2 };
-      } else {
-        return { color: 'brown', weight: 2 };
-      }
-    }
-  }).addTo(map);
 
-  councils.bindPopup(layer => {
-    // return L.Util.template('<p><b>District #{DISTRICT_}</b><br>Member: {NAME}<br><a target="_blank" href="{URL}">Website</a></p>', layer.feature.properties)
-    return L.Util.template('<p>{EXMPDESC}</p>', layer.feature.properties)
-  })
+  function setStyle(feature) { 
+    if (feature.properties['PARTY'] === 'D') {
+      return { color: 'blue', weight: 2 };
+    } else if (feature.properties['PARTY'] === 'R') {
+      return { color: 'red', weight: 2 };
+    } else {
+      return { color: 'white', weight: 2 };
+    }  
+  }
+
+  map.on('click', (e) => {
+    Object.keys(currentFeatures).forEach(feature => {
+      if (currentFeatures[feature]) {
+        map.removeLayer(currentFeatures[feature]);
+      }
+    })
+
+    // query the state reps polygons for point containment
+    featureLayers.representative.query().contains(L.latLng(e.latlng)).run((error, featureCollection) => {
+      featureCollection.features.forEach(feature => {
+        currentFeatures.representative = L.geoJSON(featureCollection.features[0], { style: setStyle });
+
+        currentFeatures.representative.bindPopup(layer => {
+          return L.Util.template('<p>{NAME}<br>District {DISTRICT_1}<br>Population: {POPULATION}</p>', layer.feature.properties);
+        })
+
+        currentFeatures.representative.addTo(map);
+      })
+    });
+
+    // query the state senate polygons for point containment
+    featureLayers.senate.query().contains(L.latLng(e.latlng)).run((error, featureCollection) => {
+      featureCollection.features.forEach(feature => {
+        currentFeatures.senate = L.geoJSON(featureCollection.features[0], { style: setStyle })
+
+        currentFeatures.senate.bindPopup(layer => {
+          return L.Util.template('<p>{NAME}<br>District {DISTRICT_1}<br>Population: {POPULATION}</p>', layer.feature.properties);
+        })
+
+        currentFeatures.senate.addTo(map);
+      })
+    });
+
+  });
 
 </script>
 
