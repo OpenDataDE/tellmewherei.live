@@ -1,0 +1,81 @@
+body { margin:0; padding:0; }
+    .wrapper { 
+      border : 2px solid #000; 
+      overflow:hidden;
+    }
+    .wrapper div {
+       padding: 10px;
+    }
+    #map {
+      background-color: gray;
+      float:left;
+      margin-right:20px;
+      position: relative;
+      width:30%;
+      height: 40%;
+      border-right:2px solid #000;
+    }
+    #info { 
+      background-color: white;
+      overflow:hidden;
+      margin:10px;
+      border:2px solid #ccc;
+      min-height:170px;
+    }
+    @media screen and (max-width: 400px) {
+       #map { 
+        float: none;
+        margin-right:0;
+        width:auto;
+        border:0;
+        border-bottom:2px solid #000;    
+      }
+    }
+    #repsData {
+      height: 1100px;
+      width: 375px;
+      background-color: aquamarine;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 20px 10px 0;
+      word-wrap: break-word;
+    }
+    #sensData {
+      height: 1100px;
+      width: 375px;
+      background-color: coral;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+      word-wrap: break-word;
+    }
+    #electData {
+      height: 1100px;
+      width: 375px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 20px 10px 0;
+      word-wrap: break-word;
+    }
+    #schoolData {
+      height: 1100px;
+      width: 375px;
+      background-color: ghostwhite;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+      word-wrap: break-word;
+    }
+    #G2Data {
+      height: 200px;
+      width: 200px;
+      background-color: gray;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    table {
+      clear: both;
+      margin: 100px 0 0 0;
+    }
