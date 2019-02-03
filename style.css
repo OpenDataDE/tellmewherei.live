@@ -32,45 +32,118 @@ body { margin:0; padding:0; }
       }
     }
     #repsData {
-      height: 1100px;
-      width: 375px;
-      background-color: aquamarine;
+      height: 100px;
+      width: 400px;
+      background-color: ghostwhite;
       border: 2px, solid, black;
       float: left;
       margin: 0 20px 10px 0;
       word-wrap: break-word;
     }
     #sensData {
-      height: 1100px;
-      width: 375px;
-      background-color: coral;
+      height: 100px;
+      width: 400px;
+      background-color: gainsboro;
       border: 2px, solid, black;
       float: left;
       margin: 0 10px 10px 0;
       word-wrap: break-word;
     }
     #electData {
-      height: 1100px;
-      width: 375px;
-      background-color: yellow;
+      height: 100px;
+      width: 400px;
+      background-color: blue;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 20px 10px 0;
+      word-wrap: break-word;
+    }
+    #communities {
+      height: 100px;
+      width: 400px;
+      background-color: darkseagreen;
       border: 2px, solid, black;
       float: left;
       margin: 0 20px 10px 0;
       word-wrap: break-word;
     }
     #schoolData {
-      height: 1100px;
-      width: 375px;
-      background-color: ghostwhite;
+      height: 100px;
+      width: 400px;
+      background-color: orange;
       border: 2px, solid, black;
       float: left;
       margin: 0 10px 10px 0;
       word-wrap: break-word;
     }
-    #G2Data {
-      height: 200px;
-      width: 200px;
-      background-color: gray;
+    #patternFour {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternFive {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternSix {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternSeven {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternEight {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternNine {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternTen {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternEleven {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternTwelve {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
       border: 2px, solid, black;
       float: left;
       margin: 0 10px 10px 0;

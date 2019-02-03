@@ -1,4 +1,6 @@
 <html>
+
+
 <head>
   <meta charset=utf-8 />
   <title>TellMeWhereI.Live -- An Open Data Delaware Project</title>
@@ -30,67 +32,37 @@
   crossorigin="">
   </script>
   
+  
+
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-
 <body>
 <div class="wrapper">
+
   <div id="map"></div>
+
   <div id="info">
-    <b>Address</b>
-    <form>
-      <input id="address" type="text" value="616 Nesting Ln, Middletown, DE 19709"></input>
-      <input id="geocode" value="Lookup" type="button"></input>
-    </form>
     <p><div id="repsData">Representative Data</div></P>
     <p><div id="sensData">Senate Data</div></p>
     <p><div id="electData">Election District Data</div></p>
+    <p><div id="communities">Delaware Communities</div></p>
     <p><div id="schoolData">School District Data</div></p>
-    <!--
-    <p><div id="g2Data"></div></p>
-    -->
-
-    <!--
-    <table>
-      <tr>
-        <th>Type</th>
-      </tr>
-      <tr id='stateRepresentative'>
-        <td>State Representative</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr id='stateSenator'>
-        <td>State Senator</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr id='electionDistrict'>
-        <td>Election District</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr id='schoolDistrict'>
-        <td>School District</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr id='feederPatternTwo'>
-        <td>G2 Feeder Pattern</td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
--->
-    <ul id="applicableLayers">
-    </ul>
+    <p><div id="patternFour">Feeder Pattern - Grade Four</div></p>
+    <p><div id="patternFive">Feeder Pattern - Grade Five</div></p>
+    <p><div id="patternSix">Feeder Pattern - Grade Six</div></p>
+    <p><div id="patternSeven">Feeder Pattern - Grade Seven</div></p>
+    <p><div id="patternEight">Feeder Pattern - Grade Eight</div></p>
+    <p><div id="patternNine">Feeder Pattern - Grade Nine</div></p>
+    <p><div id="patternTen">Feeder Pattern - Grade Ten</div></p>
+    <p><div id="patternEleven">Feeder Pattern - Grade Eleven</div></p>
+    <p><div id="patternTwelve">Feeder Pattern - Grade Twelve</div></p>
+    <ul id="applicableLayers"></ul>
   </div>
 </div>
 
-<!-- <script type="text/javascript" src="dataVerificationCode.js"></script> -->
-<script type="text/javascript" src="featureLayersObject.js"></script>
-<script type="text/javascript" src="featurePropsGetterClass.js"></script>
+<script type="text/javascript" src="featureLayers_Object.js"></script>
+<script type="text/javascript" src="featureDataGetter_Class.js"></script>
 <script type="text/javascript" src="app.js"></script>
 </body>
 
