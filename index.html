@@ -1,265 +1,70 @@
 <html>
+
+
 <head>
   <meta charset=utf-8 />
   <title>TellMeWhereI.Live -- An Open Data Delaware Project</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/esri-leaflet/2.2.3/esri-leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <!-- Load Leaflet from CDN -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
+
   <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
   integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-  crossorigin=""></script>
+  crossorigin="">
+  </script>
 
 
   <!-- Load Esri Leaflet from CDN -->
   <script src="https://unpkg.com/esri-leaflet@2.1.4/dist/esri-leaflet.js"
   integrity="sha512-m+BZ3OSlzGdYLqUBZt3u6eA0sH+Txdmq7cqA1u8/B2aTXviGMMLOfrKyiIW7181jbzZAY0u+3jWoiL61iLcTKQ=="
-  crossorigin=""></script>
+  crossorigin="">
+  </script>
 
   <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.js"
   integrity="sha512-QXchymy6PyEfYFQeOUuoz5pH5q9ng0eewZN8Sv0wvxq3ZhujTGF4eS/ySpnl6YfTQRWmA2Nn3Bezi9xuF8yNiw=="
-  crossorigin=""></script>
+  crossorigin="">
+  </script>
+  
+  
 
-  <script src="https://js.arcgis.com/4.7/"></script>
-  <script src="jquery-3.3.1.min.js"></script>
-
-  <style>
-    body { margin:0; padding:0; }
-
-    .wrapper { 
-      border : 2px solid #000; 
-      overflow:hidden;
-    }
-    .wrapper div {
-       padding: 10px;
-    }
-    #map {
-      background-color: gray;
-      float:left;
-      margin-right:20px;
-      position: relative;
-      width:75%;
-      height: 80%;
-      border-right:2px solid #000;
-    }
-    #info { 
-      background-color: white;
-      overflow:hidden;
-      margin:10px;
-      border:2px solid #ccc;
-      min-height:170px;
-    }
-
-    @media screen and (max-width: 400px) {
-       #map { 
-        float: none;
-        margin-right:0;
-        width:auto;
-        border:0;
-        border-bottom:2px solid #000;    
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-
 <div class="wrapper">
+
   <div id="map"></div>
+
   <div id="info">
-    <b>Address</b>
-    <form>
-      <input id="address" type="text" value="616 Nesting Ln, Middletown, DE 19709"></input>
-      <input id="geocode" value="Lookup" type="button"></input>
-    </form>
-    <p/>
-    <p/>
-    <table>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Party</th>
-      </tr>
-      <tr id='stateRepresentative'>
-        <td>State Representative</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr id='stateSenator'>
-        <td>State Senator</td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-
-    <table>
-      <tr>
-        <th>District</th>
-        <th>EDRD 2012</th>
-        <th>Population</th>
-      </tr>
-      <tr id='electionDistrict'>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-
-    <ul id="applicableLayers">
-    </ul>
+    <p><div id="repsData">Representative Data</div></P>
+    <p><div id="sensData">Senate Data</div></p>
+    <p><div id="electData">Election District Data</div></p>
+    <p><div id="communities">Delaware Communities</div></p>
+    <p><div id="schoolData">School District Data</div></p>
+    <p><div id="patternFour">Feeder Pattern - Grade Four</div></p>
+    <p><div id="patternFive">Feeder Pattern - Grade Five</div></p>
+    <p><div id="patternSix">Feeder Pattern - Grade Six</div></p>
+    <p><div id="patternSeven">Feeder Pattern - Grade Seven</div></p>
+    <p><div id="patternEight">Feeder Pattern - Grade Eight</div></p>
+    <p><div id="patternNine">Feeder Pattern - Grade Nine</div></p>
+    <p><div id="patternTen">Feeder Pattern - Grade Ten</div></p>
+    <p><div id="patternEleven">Feeder Pattern - Grade Eleven</div></p>
+    <p><div id="patternTwelve">Feeder Pattern - Grade Twelve</div></p>
+    <ul id="applicableLayers"></ul>
   </div>
 </div>
 
-<script>
-  let addressMarker
-
-  $(document).ready(() => {
-    $('#geocode').on('click', geocodeAddress)
-
-    $('html').bind('keypress', (e) => {
-       if(e.keyCode === 13) {
-          geocodeAddress()
-          return false
-       }
-    })
-  })
-
-  const geocoderUrl = 'https://gis.nccde.org/agsserver/rest/services/Composite_Locator/GeocodeServer'
-
-  const featureLayers = {
-    representative: L.esri.featureLayer({
-      url: 'https://firstmap.delaware.gov/arcgis/rest/services/Boundaries/DE_DistrictsRepresentative/MapServer/0'
-    }),
-    senate: L.esri.featureLayer({
-      url: 'https://firstmap.delaware.gov/arcgis/rest/services/Boundaries/DE_DistrictsSenate/MapServer/0'
-    }),
-    electionDistrict: L.esri.featureLayer({
-      url: 'https://firstmap.delaware.gov/arcgis/rest/services/Boundaries/DE_Election_Boundaries/MapServer/0'
-    })
-  }
-
-  function geocodeAddress() {
-    if (addressMarker) {
-      map.removeLayer(addressMarker)
-    }
-
-    const address = document.querySelector('#address').value
-
-    L.esri.Geocoding.geocode({
-      url: geocoderUrl,
-    }).text(address).run((err, response) => {
-      if (err) {
-        console.log(err)
-        return
-      }
-
-      addressMarker = L.marker(response.results[0].latlng, {
-        title: address
-      })
-
-      addressMarker.addTo(map)
-
-      lookupAllLayers(response.results[0].latlng)
-
-    })
-  }
-
-  const currentFeatures = {}
-
-  // set the map to the center of Delaware at zoom level 9
-  var map = L.map("map").setView([39.144974,-75.947085], 9);
-
-  L.esri.basemapLayer("Topographic").addTo(map);
-
-  function setStyle(feature) { 
-    if (feature.properties['PARTY'] === 'D') {
-      return { color: 'blue', weight: 2 };
-    } else if (feature.properties['PARTY'] === 'R') {
-      return { color: 'red', weight: 2 };
-    } else {
-      return { color: 'white', weight: 2 };
-    }  
-  }
-
-  function setElectionDistrictStyle(feature) {
-    return { color: 'black', weight: 5 }
-  }
-
-  function lookupAllLayers(latlng) {
-    Object.keys(currentFeatures).forEach(feature => {
-      if (currentFeatures[feature]) {
-        map.removeLayer(currentFeatures[feature]);
-      }
-    })
-
-    // query the state reps polygons for point containment
-    featureLayers.representative.query().contains(L.latLng(latlng)).run((error, featureCollection) => {
-      featureCollection.features.forEach(feature => {
-        currentFeatures.representative = L.geoJSON(feature, { style: setStyle });
-
-        currentFeatures.representative.bindPopup(layer => {
-          return L.Util.template('<p>{NAME}<br>District {DISTRICT_1}<br>Population: {POPULATION}</p>', layer.feature.properties);
-        })
-
-        $('#stateRepresentative td:eq(1)').text(feature.properties.NAME)
-        $('#stateRepresentative td:eq(2)').text(feature.properties.PARTY)
-
-        currentFeatures.representative.addTo(map);
-      })
-    });
-
-    // query the state senate polygons for point containment
-    featureLayers.senate.query().contains(L.latLng(latlng)).run((error, featureCollection) => {
-      featureCollection.features.forEach(feature => {
-        currentFeatures.senate = L.geoJSON(feature, { style: setStyle })
-
-        currentFeatures.senate.bindPopup(layer => {
-          return L.Util.template('<p>{NAME}<br>District {DISTRICT_1}<br>Population: {POPULATION}</p>', layer.feature.properties);
-        })
-
-        $('#stateSenator td:eq(1)').text(feature.properties.NAME)
-        $('#stateSenator td:eq(2)').text(feature.properties.PARTY)
-
-        currentFeatures.senate.addTo(map);
-      })
-    });
-
-    // query the election district polygons for point containment
-    featureLayers.electionDistrict.query().contains(L.latLng(latlng)).run((error, featureCollection) => {
-      featureCollection.features.forEach(feature => {
-        currentFeatures.electionDistrict = L.geoJSON(feature, { style: setElectionDistrictStyle })
-
-        currentFeatures.electionDistrict.bindPopup(layer => {
-          return L.Util.template('<p>District {DISTRICT}<br>Population: {POPULATION}</p>', layer.feature.properties);
-        })
-
-        $('#electionDistrict td:eq(0)').text(feature.properties.EDRD_2012)
-        $('#electionDistrict td:eq(1)').text(feature.properties.DISTRICT)
-        $('#electionDistrict td:eq(2)').text(feature.properties.POPULATION)
-
-        currentFeatures.electionDistrict.addTo(map);
-      })
-    });
-
-  }
-
-  map.on('click', e => {
-    if (addressMarker) {
-      map.removeLayer(addressMarker)
-    }
-
-    addressMarker = L.marker(e.latlng, {
-      title: e.latlng.toString()
-    })
-
-    addressMarker.addTo(map)
-
-    lookupAllLayers(e.latlng)
-  });
-
-</script>
-
+<script type="text/javascript" src="featureLayers_Object.js"></script>
+<script type="text/javascript" src="featureDataGetter_Class.js"></script>
+<script type="text/javascript" src="app.js"></script>
 </body>
+
+
 </html>

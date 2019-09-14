@@ -1,0 +1,154 @@
+body { margin:0; padding:0; }
+    .wrapper { 
+      border : 2px solid #000; 
+      overflow:hidden;
+    }
+    .wrapper div {
+       padding: 10px;
+    }
+    #map {
+      background-color: gray;
+      float:left;
+      margin-right:20px;
+      position: relative;
+      width:30%;
+      height: 40%;
+      border-right:2px solid #000;
+    }
+    #info { 
+      background-color: white;
+      overflow:hidden;
+      margin:10px;
+      border:2px solid #ccc;
+      min-height:170px;
+    }
+    @media screen and (max-width: 400px) {
+       #map { 
+        float: none;
+        margin-right:0;
+        width:auto;
+        border:0;
+        border-bottom:2px solid #000;    
+      }
+    }
+    #repsData {
+      height: 100px;
+      width: 400px;
+      background-color: ghostwhite;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 20px 10px 0;
+      word-wrap: break-word;
+    }
+    #sensData {
+      height: 100px;
+      width: 400px;
+      background-color: gainsboro;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+      word-wrap: break-word;
+    }
+    #electData {
+      height: 100px;
+      width: 400px;
+      background-color: blue;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 20px 10px 0;
+      word-wrap: break-word;
+    }
+    #communities {
+      height: 100px;
+      width: 400px;
+      background-color: darkseagreen;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 20px 10px 0;
+      word-wrap: break-word;
+    }
+    #schoolData {
+      height: 100px;
+      width: 400px;
+      background-color: orange;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+      word-wrap: break-word;
+    }
+    #patternFour {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternFive {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternSix {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternSeven {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternEight {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternNine {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternTen {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternEleven {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    #patternTwelve {
+      height: 100px;
+      width: 400px;
+      background-color: yellow;
+      border: 2px, solid, black;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    table {
+      clear: both;
+      margin: 100px 0 0 0;
+    }
